@@ -6,6 +6,8 @@ from typing import Dict, List
 from tqdm import tqdm
 import re
 
+last_id = 0
+
 
 def get_label2id(labels_path: str) -> Dict[str, int]:
     """id is 1 start"""
@@ -34,6 +36,7 @@ def get_annpaths(ann_dir_path: str = None,
 
 
 def get_image_info(annotation_root, extract_num_from_imgid=True):
+    global names_map, last_id
     path = annotation_root.findtext('path')
     if path is None:
         filename = annotation_root.findtext('filename')
@@ -42,7 +45,9 @@ def get_image_info(annotation_root, extract_num_from_imgid=True):
     img_name = os.path.basename(filename)
     img_id = os.path.splitext(img_name)[0]
     if extract_num_from_imgid and isinstance(img_id, str):
-        img_id = int(re.findall(r'\d+', img_id)[0])
+        last_id = last_id + 1
+        img_id = last_id
+        
 
     size = annotation_root.find('size')
     width = int(size.findtext('width'))
