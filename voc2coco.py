@@ -141,7 +141,7 @@ def main():
     parser.add_argument('--extract_num_from_imgid', action="store_true",
                         help='Extract image number from the image filename')
     parser.add_argument('--ordered_ids', action="store_true",
-                        help='Set the ids in ascedant order instead of using filename.')
+                        help='Set the ids in ascendant order instead of using filename. Overrides --extract_num_from_imgid')
     args = parser.parse_args()
     label2id = get_label2id(labels_path=args.labels)
     ann_paths = get_annpaths(
