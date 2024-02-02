@@ -1,0 +1,15 @@
+<annotation>
+  <folder>train/0a31cf6f-4ebb-47f0-baf0-1ba9fb87debe</folder>
+  <filename>train/0a31cf6f-4ebb-47f0-baf0-1ba9fb87debe_D9Rr3G4qJtQFlOfTovvbwvHwZCez8Nwg.jpg</filename>
+  <source>
+    <database>Unknown</database>
+    <annotation>Unknown</annotation>
+    <image>Unknown</image>
+  </source>
+  <size>
+    <width>1280</width>
+    <height>720</height>
+    <depth></depth>
+  </size>
+  <segmented>0</segmented>
+</annotation>

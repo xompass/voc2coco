@@ -1,0 +1,33 @@
+<annotation>
+  <folder>train/0a280f89-cbad-400b-b6b1-0ac5c18c7b9f</folder>
+  <filename>train/0a280f89-cbad-400b-b6b1-0ac5c18c7b9f_Un4KsHykrQS3iBXrKAPFAS2TWJZ134KN.jpg</filename>
+  <source>
+    <database>Unknown</database>
+    <annotation>Unknown</annotation>
+    <image>Unknown</image>
+  </source>
+  <size>
+    <width>1280</width>
+    <height>720</height>
+    <depth></depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>person</name>
+    <truncated>0</truncated>
+    <occluded>0</occluded>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>544.29</xmin>
+      <ymin>40.67</ymin>
+      <xmax>577.81</xmax>
+      <ymax>123.61</ymax>
+    </bndbox>
+    <attributes>
+      <attribute>
+        <name>rotation</name>
+        <value>0.0</value>
+      </attribute>
+    </attributes>
+  </object>
+</annotation>
