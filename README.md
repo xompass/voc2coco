@@ -64,6 +64,17 @@ $ python voc2coco.py \
     <option> --ext xml
 ```
 
+##### 2.3 Usage 3(Annotation paths list with ordered ids)
+
+```bash
+$ python voc2coco.py \
+    --ann_paths_list /path/to/annotation/paths.txt \
+    --labels /path/to/labels.txt \
+    --output /path/to/output.json \
+    <option> --ext xml \
+    --ordered_ids
+```
+
 ### 3. Example of usage
 
 In this case, you can convert [Shenggan/BCCD_Dataset: BCCD Dataset is a small-scale dataset for blood cells detection.](https://github.com/Shenggan/BCCD_Dataset) by this script.

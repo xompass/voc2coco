@@ -6,6 +6,7 @@ from typing import Dict, List
 from tqdm import tqdm
 import re
 
+last_id = 0
 
 def get_label2id(labels_path: str) -> Dict[str, int]:
     """id is 1 start"""
@@ -33,7 +34,8 @@ def get_annpaths(ann_dir_path: str = None,
     return ann_paths
 
 
-def get_image_info(annotation_root, extract_num_from_imgid=True):
+def get_image_info(annotation_root, extract_num_from_imgid=True, ordered_ids=False):
+    global last_id
     path = annotation_root.findtext('path')
     if path is None:
         filename = annotation_root.findtext('filename')
@@ -43,6 +45,10 @@ def get_image_info(annotation_root, extract_num_from_imgid=True):
     img_id = os.path.splitext(img_name)[0]
     if extract_num_from_imgid and isinstance(img_id, str):
         img_id = int(re.findall(r'\d+', img_id)[0])
+
+    if ordered_ids:
+        img_id = last_id
+        last_id = last_id + 1
 
     size = annotation_root.find('size')
     width = int(size.findtext('width'))
@@ -83,7 +89,8 @@ def get_coco_annotation_from_obj(obj, label2id):
 def convert_xmls_to_cocojson(annotation_paths: List[str],
                              label2id: Dict[str, int],
                              output_jsonpath: str,
-                             extract_num_from_imgid: bool = True):
+                             extract_num_from_imgid: bool = True,
+                             ordered_ids: bool = False):
     output_json_dict = {
         "images": [],
         "type": "instances",
@@ -98,7 +105,8 @@ def convert_xmls_to_cocojson(annotation_paths: List[str],
         ann_root = ann_tree.getroot()
 
         img_info = get_image_info(annotation_root=ann_root,
-                                  extract_num_from_imgid=extract_num_from_imgid)
+                                  extract_num_from_imgid=extract_num_from_imgid,
+                                    ordered_ids=ordered_ids)
         img_id = img_info['id']
         output_json_dict['images'].append(img_info)
 
@@ -132,6 +140,8 @@ def main():
     parser.add_argument('--ext', type=str, default='', help='additional extension of annotation file')
     parser.add_argument('--extract_num_from_imgid', action="store_true",
                         help='Extract image number from the image filename')
+    parser.add_argument('--ordered_ids', action="store_true",
+                        help='Set the ids in ascendant order instead of using filename. Overrides --extract_num_from_imgid')
     args = parser.parse_args()
     label2id = get_label2id(labels_path=args.labels)
     ann_paths = get_annpaths(
@@ -144,7 +154,8 @@ def main():
         annotation_paths=ann_paths,
         label2id=label2id,
         output_jsonpath=args.output,
-        extract_num_from_imgid=args.extract_num_from_imgid
+        extract_num_from_imgid=args.extract_num_from_imgid,
+        ordered_ids=args.ordered_ids
     )
 
 
